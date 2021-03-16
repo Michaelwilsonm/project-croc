@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "890348154877",
+    "project_id": "crocky-84b41",
+    "storage_bucket": "crocky-84b41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890348154877:android:5c99c2847a008e9ac5f394",
+        "android_client_info": {
+          "package_name": "com.projectcroc.project_croc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890348154877-m8fhpitddaslmk442btj3rdl4ukmmmnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlF32FyNWsqnJmhqEEyslOkDQDQNXibJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "890348154877-m8fhpitddaslmk442btj3rdl4ukmmmnf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "890348154877-6dif8l87olb4dti8m35vu8gs1rfaja4a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "projectcroc.projectCroc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
