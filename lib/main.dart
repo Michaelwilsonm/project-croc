@@ -1,11 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'authentication_service.dart';
+import './login_screen.dart';
+import 'home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -18,22 +22,23 @@ class MyApp extends StatelessWidget {
             create: (_) => AuthenticationService(FirebaseAuth.instance),
           ),
           StreamProvider(
+            initialData: null,
             create: (context) =>
                 context.read<AuthenticationService>().authStateChanges,
           ),
         ],
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Project Croc',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: AuthenticationWrapper(),
+          home: LandingScreen(),
         ));
   }
 }
 
-class AuthenticationWrapper extends StatelessWidget {
-  const AuthenticationWrapper({
+class LandingScreen extends StatelessWidget {
+  const LandingScreen({
     Key key,
   }) : super(key: key);
 
@@ -41,64 +46,8 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
     if (firebaseUser != null) {
-      return Text("Signed in");
+      return HomeScreen();
     }
-
-    return Text("Not Signed in");
+    return LoginScreen();
   }
 }
-
-// class MyHomePage extends StatefulWidget {
-//   MyHomePage({Key key, this.title}) : super(key: key);
-//   final String title;
-
-//   @override
-//   _MyHomePageState createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   int _counter = 0;
-
-//   void _incrementCounter() {
-//     // Some collection setting
-//     // CollectionReference collection =
-//     //     FirebaseFirestore.instance.collection('test');
-
-//     // collection
-//     //     .add({'name': "Michael"})
-//     //     .then((value) => print("Collection Added"))
-//     //     .catchError((error) => print("Failed to add user: $error"));
-
-//     setState(() {
-//       _counter++;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text(
-//               'You have pushed the button this many times:',
-//             ),
-//             Text(
-//               '$_counter',
-//               style: Theme.of(context).textTheme.headline4,
-//             ),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: _incrementCounter,
-//         tooltip: 'Increment',
-//         child: Icon(Icons.add),
-//       ),
-//     );
-//   }
-// }
