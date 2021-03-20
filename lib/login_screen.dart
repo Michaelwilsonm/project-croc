@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_croc/config/utilities/constants.dart';
 import 'package:provider/provider.dart';
-import 'authentication_service.dart';
+import 'authentication/authentication_service.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
