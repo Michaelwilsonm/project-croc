@@ -15,8 +15,9 @@ class AuthenticationService {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       return "Signed in";
-    } on FirebaseAuthException catch (e) {
-      return Future.error(e.message);
+    } on FirebaseAuthException catch (error) {
+      var errorMessage = signInError(error);
+      return Future.error(errorMessage);
     }
   }
 
@@ -27,6 +28,17 @@ class AuthenticationService {
       return "Signed up";
     } on FirebaseAuthException catch (e) {
       return e.message;
+    }
+  }
+
+  signInError(FirebaseAuthException error) {
+    print(error.code);
+    switch (error.code) {
+      case "invalid-email":
+        return "Invalid email address format";
+        break;
+      default:
+        return "Invalid Email or Password";
     }
   }
 }

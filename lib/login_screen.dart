@@ -120,10 +120,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  _submit() async {
+  _setIsLoading(bool value) {
     setState(() {
-      _isLoading = true;
+      _isLoading = value;
     });
+  }
+
+  _submit() async {
+    _setIsLoading(true);
 
     await context
         .read<AuthenticationService>()
@@ -132,10 +136,31 @@ class _LoginScreenState extends State<LoginScreen> {
           password: passwordController.text.trim(),
         )
         .then((onSuccess) {
-      _isLoading = false;
-    }).catchError((err) {
-      print('err $err');
-      _isLoading = false;
+      _setIsLoading(false);
+    }).catchError((e) {
+      _setIsLoading(false);
+      _showErrorDialog(e);
     });
+  }
+
+  void _showErrorDialog(String err) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          content: new Text(err),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new TextButton(
+              child: new Text("Ok"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
