@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:project_croc/profile_screen.dart' '';
+import 'package:provider/provider.dart';
+
+import '../authentication/authentication_service.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -28,8 +33,24 @@ class MainDrawer extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Logout'),
+          title: Text('Croc bikes'),
           onTap: () {},
+        ),
+        ListTile(
+          title: Text('Account'),
+          onTap: () {
+            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileScreen()),
+            );
+          },
+        ),
+        ListTile(
+          title: Text('Sign out - temporary'),
+          onTap: () {
+            context.read<AuthenticationService>().signOut();
+          },
         ),
       ]),
     );

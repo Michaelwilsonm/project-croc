@@ -21,6 +21,9 @@ class AuthenticationService {
     }
   }
 
+  // when creating a new user, we should be storing a new user document with profile settings etc.
+  // database service can do that
+
   Future<String> signUp({String email, String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
